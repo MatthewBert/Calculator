@@ -3,6 +3,60 @@ html{
 }
 
 body{
-    background: rgb(80,0,153);
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6620a7;
     background: linear-gradient(135deg, #6620a7, #3c67bb);
+}
+
+#container{
+    color: #222222;
+    background: rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur(4px);
+    flex-basis: 400px;
+    height: 530px;
+    padding: 20px 40px;
+    border:  2px solid rgba(255, 255, 255, 0.50);
+    border-radius: 12px;
+}
+
+#screen{
+    font-size: 36px;
+    text-align: right;
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 368px;
+    padding: 16px;
+}
+
+.button-row{
+    display: flex;
+    justify-content: space-between;
+    margin: 5% 0;
+}
+
+.calc-button{
+    border:  1px solid rgba(255, 255, 255, 0.50);
+    border-radius: 12px;
+    flex-basis: 20%;
+    font-size: 24px;
+    height: 60px;
+}
+
+.calc-button:hover{
+    background-color: inherit;
+}
+
+.calc-button:active{
+    background-color: #3363c5;
+}
+
+.double {
+    flex-basis: 47%;
+}
+
+.triple{
+    flex-basis: 73%;
 }
