@@ -1,26 +1,71 @@
 console.log("Welcome to Calculator");
 
-//DOM elements for all calculator buttons and operations
-const screen = document.querySelector('#screen');
-const clearBtn = document.querySelector('.clear');
-const undoBtn = document.querySelector('.undo');
-const divideBtn = document.querySelector('.divide');
-const timesBtn = document.querySelector('.times');
-const minusBtn = document.querySelector('.minus');
-const plusBtn = document.querySelector('.plus');
-const equalsBtn = document.querySelector('.equals');
-const numberBtn = document.querySelectorAll('.num');
-const buttons = document.querySelectorAll('.calc-button');
-
-console.log(clearBtn.textContent)
-
-//Global data storage
-let currentNumber = '';
 let operatorValue = '';
-let display = '';
-let sum = "0";
+let previousValue = '';
+let currentValue = '';
 
+document.addEventListener("DOMContentLoaded", function(){
+        //DOM elements for all calculator buttons and operations
+    let screen = document.querySelector('#screen');
+    let clearBtn = document.querySelector('.clear');
+    let undoBtn = document.querySelector('.undo');
+    let equalBtn = document.querySelector('.equal');
+    let operators = document.querySelectorAll('.operator');
+    let numbers = document.querySelectorAll('.num');
 
+    numbers.forEach((number) => number.addEventListener("click", function(e){
+        handleNumber(e.target.textContent);
+        screen.textContent = currentValue;
+    }));
+
+    operators.forEach((operator) => operator.addEventListener("click", function(e){
+        handleOperator(e.target.textContent);
+        screen.textContent = previousValue + ' ' + operatorValue;
+    }));
+
+    clearBtn.addEventListener("click", function(){
+        previousValue = '';
+        currentValue = '';
+        operatorValue = '';
+        screen.textContent = 0;
+    });
+
+    equalBtn.addEventListener("click", function(){
+        previousValue = Number(previousValue);
+        currentValue = Number(currentValue);
+
+        if(operatorValue == "/" && currentValue == 0){
+            screen.textContent = "cant divide by 0";
+        } else {
+            screen.textContent = operate(previousValue, operatorValue, currentValue);
+            currentValue = screen.textContent;
+        }
+
+    });
+
+    undoBtn.addEventListener("click", function(){
+        if(currentValue.length > 0){
+            currentValue = currentValue.slice(0,-1);
+            screen.textContent = currentValue;
+            if(currentValue.length == 0){
+                screen.textContent = 0;
+            }
+        }
+    });
+
+});
+
+function handleNumber(num){
+    if(currentValue.length <= 7){
+        currentValue = currentValue + num;
+    }
+}
+
+function handleOperator(op){
+    operatorValue = op;
+    previousValue = currentValue;
+    currentValue = '';
+}
 
 function add(a, b) {
     return a + b;
@@ -52,26 +97,4 @@ function operate(num1, operator, num2) {
     }
 }
 
-function populateDisplay() {
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            const buttonText = button.textContent;
-            console.log(buttonText);
-            
-            if (buttonText == 'C') {
-                display = '';
-                sum = '';
-                screen.textContent = '0';
-            } else {
-                if (screen.textContent === '0') {
-                    screen.textContent = '';
-                }
-                display += buttonText;
-            }
-            screen.textContent = display;
-        })
-    })
-}
-
-populateDisplay();
 
