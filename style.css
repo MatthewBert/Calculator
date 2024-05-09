@@ -7,8 +7,16 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background: #6620a7;
     background: linear-gradient(135deg, #6620a7, #3c67bb);
+}
+
+h1{
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-weight: 900;
 }
 
 #container{
@@ -28,6 +36,7 @@ body{
     background-color: #ffffff;
     border-radius: 12px;
     width: 368px;
+    height: 41px;
     padding: 16px;
 }
 
